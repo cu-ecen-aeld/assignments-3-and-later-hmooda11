@@ -133,7 +133,7 @@ cp ${FINDER_APP_DIR}/finder-test.sh ${OUTDIR}/rootfs/home/finder-test.sh
 echo ${FINDER_APP_DIR}
 echo ${OUTDIR}
 ls ${OUTDIR}/rootfs/home/conf 
-ls -l /tmp/aeld/rootfs/home/conf
+#ls -l /tmp/aeld/rootfs/home/conf
 
 
 
@@ -210,6 +210,16 @@ sudo chown -R root:root *
 # Create initramfs.cpio.gz
 cd ${OUTDIR}/rootfs
 find . | cpio -H newc -ov --owner root:root 2> /dev/null | gzip -c > ${OUTDIR}/initramfs.cpio.gz
+
+cp ${OUTDIR}/initramfs.cpio.gz /tmp/aesd-autograder/
+
+# Confirm the copy was successful
+if [ -e /tmp/aesd-autograder/initramfs.cpio.gz ]; then
+    echo "initramfs.cpio.gz successfully copied to /tmp/aesd-autograder/"
+else
+    echo "Failed to copy initramfs.cpio.gz to /tmp/aesd-autograder/"
+    exit 1
+fi
 
 echo "Success"
 
