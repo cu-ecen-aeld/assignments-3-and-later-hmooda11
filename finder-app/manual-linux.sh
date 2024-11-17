@@ -88,8 +88,6 @@ fi
 
 
 
-cp /home/hmooda11/assignment-2-hmooda11/conf/username.txt /tmp/aeld/rootfs/conf
-
 # Make and install busybox
 make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE}
 make CONFIG_PREFIX=${OUTDIR}/rootfs ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} install
@@ -139,7 +137,7 @@ ls -l /tmp/aeld/rootfs/home/conf
 
 
 
-cp /home/hmooda11/assignment-2-hmooda11/conf/username.txt /tmp/aeld/rootfs/conf/ || true
+#cp /home/hmooda11/assignment-2-hmooda11/conf/username.txt /tmp/aeld/rootfs/conf/ || true
 
 
 echo "root/"
@@ -156,14 +154,14 @@ sudo mkdir ${OUTDIR}/rootfs/etc/finder-app/conf
 
 echo "etc"
 ls -l ${OUTDIR}/rootfs/etc
-sudo cp /home/hmooda11/assignment-2-hmooda11/conf/username.txt /tmp/aeld/rootfs/etc/finder-app/conf/ || true
+#sudo cp /home/hmooda11/assignment-2-hmooda11/conf/username.txt /tmp/aeld/rootfs/etc/finder-app/conf/ || true
 
 ls -l /tmp/aeld/rootfs/etc/finder-app/conf/ || true
 
 #cp /home/hmooda11/assignment-2-hmooda11/conf/assignment.txt ${OUTDIR}/rootfs/home/conf/assignment.txt
 #cp /home/hmooda11/assignment-2-hmooda11/autorun-qemu.sh ${OUTDIR}/rootfs/home/autorun-qemu.sh
-sudo cp /home/hmooda11/assignment-2-hmooda11/finder-app/conf/username.txt ${OUTDIR}/rootfs/etc/finder-app/conf/
-sudo cp /home/hmooda11/assignment-2-hmooda11/finder-app/conf/assignment.txt ${OUTDIR}/rootfs/etc/finder-app/conf/
+sudo cp ${FINDER_APP_DIR}/conf/username.txt ${OUTDIR}/rootfs/etc/finder-app/conf/
+sudo cp ${FINDER_APP_DIR}/conf/assignment.txt ${OUTDIR}/rootfs/etc/finder-app/conf/
 
 
 # Ensure the /home directory exists
