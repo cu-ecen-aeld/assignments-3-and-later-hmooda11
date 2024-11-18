@@ -16,26 +16,29 @@ void* threadfunc(void* thread_param)
     //struct thread_data* thread_func_args = (struct thread_data *) thread_param;
     
     struct thread_data* data = (struct thread_data*) thread_param;
-    
+
+    // Sleep before attempting to lock the mutex
     usleep(data->wait_to_obtain_ms * 1000);
-    
+
+    // Attempt to lock the mutex (will block if already locked)
     if (pthread_mutex_lock(data->mutex) != 0) {
-    	ERROR_LOG("Failed to lock mutex\n");
-    	data->thread_complete_success = false;
-    	return data;
+        ERROR_LOG("Failed to lock mutex\n");
+        data->thread_complete_success = false;
+        return data;
     }
-    
+
+    // Sleep while holding the mutex
     usleep(data->wait_to_release_ms * 1000);
-    
-    if(pthread_mutex_unlock(data->mutex) != 0 ) {
-    	ERROR_LOG("Failed to unlock mutex\n");
-    	data->thread_complete_success = false;
-    	return data;
+
+    // Unlock the mutex
+    if (pthread_mutex_unlock(data->mutex) != 0) {
+        ERROR_LOG("Failed to unlock mutex\n");
+        data->thread_complete_success = false;
+        return data;
     }
-    
+
+    // Mark the thread as successful
     data->thread_complete_success = true;
-    
-    
     return data;
 }
 
@@ -52,24 +55,24 @@ bool start_thread_obtaining_mutex(pthread_t *thread, pthread_mutex_t *mutex,int 
      */
      
     struct thread_data* data = (struct thread_data*)malloc(sizeof(struct thread_data));
-    
-    if(data == NULL) {
-    	ERROR_LOG("Failed to allocate memory for thread_data\n");
+    if (data == NULL) {
+        ERROR_LOG("Failed to allocate memory for thread_data\n");
         return false;
     }
-    
+
+    // Initialize thread data
     data->mutex = mutex;
     data->wait_to_obtain_ms = wait_to_obtain_ms;
     data->wait_to_release_ms = wait_to_release_ms;
     data->thread_complete_success = false;
-    
-    if(pthread_create(thread, NULL, threadfunc, data) != 0) {
-    	ERROR_LOG("Failed to create thread\n");
-        free(data); // Free allocated memory on failure
+
+    // Create the thread
+    if (pthread_create(thread, NULL, threadfunc, data) != 0) {
+        ERROR_LOG("Failed to create thread\n");
+        free(data); // Avoid memory leak
         return false;
     }
-    
-     
+
     return true;
 }
 
