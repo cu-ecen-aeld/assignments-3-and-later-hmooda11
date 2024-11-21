@@ -64,9 +64,6 @@ done
 echo "Current directory is: $(pwd)"
 
 echo "-------"
-ls -l
-ls -l finder.sh
-head -n 1 finder.sh
 echo "-------"
 echo ${WRITEDIR}
 echo ${WRITESTR}
