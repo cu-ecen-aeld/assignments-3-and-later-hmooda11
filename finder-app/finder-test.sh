@@ -54,10 +54,10 @@ fi
 
 echo "Current directory is: $(pwd)"
 ls
-
+ls -l /usr/bin
 for i in $( seq 1 $NUMFILES)
 do
-	/usr/bin/writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+	/usr/bin/writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
 
 
