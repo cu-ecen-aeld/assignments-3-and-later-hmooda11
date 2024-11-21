@@ -54,7 +54,7 @@ fi
 
 for i in $( seq 1 $NUMFILES)
 do
-	./writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+	writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
 
 
@@ -62,22 +62,16 @@ echo "Current directory is: $(pwd)"
 
 echo "-------"
 ls -l
-
-echo "-------"
 ls -l finder.sh
-
-echo "-------"
 head -n 1 finder.sh
-
-
 echo "-------"
-
 echo ${WRITEDIR}
 echo ${WRITESTR}
-
 echo "-------"
 
-OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
+OUTPUTSTRING=$(finder.sh "$WRITEDIR" "$WRITESTR")
+
+echo ${OUTPUTSTRING} > /tmp/assignment4-result.txt
 
 # remove temporary directories
 rm -rf /tmp/aeld-data
