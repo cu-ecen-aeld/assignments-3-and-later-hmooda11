@@ -52,6 +52,9 @@ fi
 #make clean
 #make
 
+echo "Current directory is: $(pwd)"
+ls
+
 for i in $( seq 1 $NUMFILES)
 do
 	writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
