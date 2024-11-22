@@ -1,15 +1,14 @@
-CC ?= $(CROSS_COMPILE)gcc
-CFLAGS ?= -Wall -Werror -g
-TARGET ?= aesdsocket
+CC = $(CROSS_COMPILE)gcc
+CFLAGS = -Wall -Werror
+TARGET = aesdsocket
 
 all: $(TARGET)
 
 $(TARGET): aesdsocket.o
 	$(CC) $(CFLAGS) -o $(TARGET) aesdsocket.o
 
-aesdsocket.o: aesdsocket.c
+writer.o: writer.c
 	$(CC) $(CFLAGS) -c aesdsocket.c
 
 clean:
-	rm -f $(TARGET) aesdsocket.o
-
+	rm -f $(TARGET) *.o
