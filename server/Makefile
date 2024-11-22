@@ -4,11 +4,12 @@ TARGET ?= aesdsocket
 
 all: $(TARGET)
 
-$(TARGET) : aesdsocket.o
+$(TARGET): aesdsocket.o
 	$(CC) $(CFLAGS) -o $(TARGET) aesdsocket.o
-	
-aesdsocket.o : aesdsocket.c
+
+aesdsocket.o: aesdsocket.c
 	$(CC) $(CFLAGS) -c aesdsocket.c
-	
-clean :
-	rm -f 	$(TARGET) aesdsocket.o	
+
+clean:
+	rm -f $(TARGET) aesdsocket.o
+
